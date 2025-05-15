@@ -7,7 +7,7 @@ const SocialLink = ({ href, icon, label }) => (
     target="_blank" 
     rel="noopener noreferrer" 
     aria-label={label} 
-    className="text-gray-400 hover:text-indigo-400 transition-colors duration-300"
+    className="text-neutral-400 hover:text-primary-DEFAULT transition-colors duration-300"
   >
     {icon}
   </a>
@@ -39,7 +39,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-slate-900 text-slate-400 pt-16 pb-8">
+    <footer className="bg-neutral-900 text-neutral-400 pt-16 pb-8">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Top section of the footer with navigation and contact */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12 mb-12">
@@ -47,7 +47,7 @@ export default function Footer() {
           <motion.div 
             custom={0} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={itemVariants}
           >
-            <h3 className="text-2xl font-bold text-white mb-4">PixelRush<span className="text-indigo-400">.</span>Sites</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">PixelRush<span className="text-primary-DEFAULT">.</span>Sites</h3>
             <p className="text-sm mb-6 leading-relaxed">
               Crafting high-performance websites that convert. We combine cutting-edge design with speed and SEO to launch your business forward, fast.
             </p>
@@ -64,14 +64,14 @@ export default function Footer() {
             custom={1} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={itemVariants}
             className="md:col-start-2 lg:col-start-auto" // Adjust column start for medium screens
           >
-            <h4 className="text-lg font-semibold text-slate-200 mb-5">Explore</h4>
+            <h4 className="text-lg font-semibold text-neutral-200 mb-5">Explore</h4>
             <ul className="space-y-3 text-sm">
               {/* These links should ideally scroll to sections or navigate to pages */}
-              <li><a href="#hero" className="hover:text-indigo-400 transition-colors">Home</a></li>
-              <li><a href="#problem" className="hover:text-indigo-400 transition-colors">The Problem</a></li>
-              <li><a href="#solution" className="hover:text-indigo-400 transition-colors">Our Solution</a></li>
-              <li><a href="#portfolio" className="hover:text-indigo-400 transition-colors">Our Work</a></li>
-              <li><a href="#testimonials" className="hover:text-indigo-400 transition-colors">Testimonials</a></li>
+              <li><a href="#hero" className="hover:text-secondary-DEFAULT transition-colors">Home</a></li>
+              <li><a href="#problem" className="hover:text-secondary-DEFAULT transition-colors">The Problem</a></li>
+              <li><a href="#solution" className="hover:text-secondary-DEFAULT transition-colors">Our Solution</a></li>
+              <li><a href="#portfolio" className="hover:text-secondary-DEFAULT transition-colors">Our Work</a></li>
+              <li><a href="#testimonials" className="hover:text-secondary-DEFAULT transition-colors">Testimonials</a></li>
             </ul>
           </motion.div>
 
@@ -79,7 +79,7 @@ export default function Footer() {
           <motion.div 
             custom={2} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={itemVariants}
           >
-            <h4 className="text-lg font-semibold text-slate-200 mb-5">Services</h4>
+            <h4 className="text-lg font-semibold text-neutral-200 mb-5">Services</h4>
             <ul className="space-y-3 text-sm">
               <li><span className="cursor-default">Web Design & Development</span></li>
               <li><span className="cursor-default">3-Day Website Delivery</span></li>
@@ -93,10 +93,10 @@ export default function Footer() {
           <motion.div 
             custom={3} initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={itemVariants}
           >
-            <h4 className="text-lg font-semibold text-slate-200 mb-5">Get in Touch</h4>
+            <h4 className="text-lg font-semibold text-neutral-200 mb-5">Get in Touch</h4>
             <ul className="space-y-3 text-sm">
-              <li>Email: <a href="mailto:hello@pixelrush.sites" className="hover:text-indigo-400 transition-colors">hello@pixelrush.sites</a></li>
-              <li>Phone: <a href="tel:+1-555-PIXRUSH" className="hover:text-indigo-400 transition-colors">(555) PIX-RUSH</a></li>
+              <li>Email: <a href="mailto:hello@pixelrush.sites" className="hover:text-accent-DEFAULT transition-colors">hello@pixelrush.sites</a></li>
+              <li>Phone: <a href="tel:+1-555-PIXRUSH" className="hover:text-accent-DEFAULT transition-colors">(555) PIX-RUSH</a></li>
               <li className="pt-2">
                 <span className="block">123 Web Design Ave,</span>
                 <span className="block">Suite 404, Internet City, CA 90210</span>
@@ -106,8 +106,8 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar with copyright */}
-        <div className="border-t border-slate-700 pt-8 mt-8 text-center text-sm">
-          <p>&copy; {currentYear} PixelRush Sites. All Rights Reserved. <a href="#" className="hover:text-indigo-400">Privacy Policy</a> | <a href="#" className="hover:text-indigo-400">Terms of Service</a></p>
+        <div className="border-t border-neutral-700 pt-8 mt-8 text-center text-sm">
+          <p>&copy; {currentYear} PixelRush Sites. All Rights Reserved. <a href="#" className="hover:text-primary-light transition-colors">Privacy Policy</a> | <a href="#" className="hover:text-primary-light transition-colors">Terms of Service</a></p>
         </div>
       </div>
     </footer>

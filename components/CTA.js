@@ -29,7 +29,7 @@ export default function CTA() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-700 text-white"> {/* Updated background to a gradient */}
+    <section className="py-16 md:py-24 bg-gradient-to-r from-primary-DEFAULT via-secondary-DEFAULT to-accent-DEFAULT text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           initial="hidden"
@@ -40,21 +40,19 @@ export default function CTA() {
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 md:mb-8 leading-tight">
             Ready to Elevate Your Business Online?
           </h2>
-          <p className="text-lg md:text-xl text-indigo-100 mb-10 md:mb-12 max-w-2xl mx-auto">
+          <p className="text-lg md:text-xl text-white/90 mb-10 md:mb-12 max-w-2xl mx-auto">
             Let PixelRush craft a stunning, high-performance website that drives results. 
             Get your free demo and see the difference.
           </p>
         </motion.div>
         <motion.button 
-          className="bg-white text-indigo-700 font-semibold py-3 px-8 md:py-4 md:px-10 rounded-lg shadow-xl hover:bg-indigo-50 transition-colors duration-300 text-base md:text-lg focus:outline-none focus:ring-4 focus:ring-indigo-300 focus:ring-opacity-70"
-          whileHover={{ scale: 1.05, boxShadow: "0px 8px 25px rgba(255, 255, 255, 0.3)" }}
+          className="bg-white text-primary-dark font-bold py-3 px-8 md:py-4 md:px-10 rounded-lg shadow-2xl hover:bg-neutral-100 transition-all duration-300 ease-in-out text-base md:text-lg focus:outline-none focus:ring-4 focus:ring-white/50 transform hover:scale-105"
+          whileHover={{ scale: 1.05, boxShadow: "0px 10px 30px rgba(0, 0, 0, 0.2)" }}
           whileTap={{ scale: 0.95 }}
-          variants={buttonVariants} // Using variants for button animation
+          variants={buttonVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
-          // onClick event to handle scroll to a contact form or open a Calendly modal
-          // Example: onClick={() => document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' })}
         >
           Book Your Free Demo Today
         </motion.button>

@@ -47,7 +47,7 @@ export default function Hero() {
   return (
     <section className="relative h-screen flex flex-col items-center justify-center text-center text-white overflow-hidden">
       {/* 3D Animated Background */}
-      <div className="absolute inset-0 z-0 bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900">
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-gray-900 to-black">
         <Canvas camera={{ position: [0, 0, 2] }}>
           <ambientLight intensity={0.5} />
           <AnimatedBackground />
@@ -78,11 +78,15 @@ export default function Hero() {
           PixelRush delivers high-converting, mobile-first websites in just 3 days. Ready to elevate your brand?
         </motion.p>
         <motion.button 
-          className="bg-indigo-500 text-white font-semibold py-3 px-8 md:py-4 md:px-10 rounded-lg shadow-lg hover:bg-indigo-400 transition-colors duration-300 text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-opacity-50"
-          whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(79, 70, 229, 0.4)" }}
+          className="bg-accent-DEFAULT text-white font-semibold py-3 px-8 md:py-4 md:px-10 rounded-lg hover:bg-accent-dark transition-colors duration-300 text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-accent-light focus:ring-opacity-75"
+          whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          animate={{ 
+            opacity: 1, 
+            y: 0, 
+            boxShadow: "0px 10px 20px rgba(249, 115, 22, 0.4)"
+          }}
           transition={{ duration: 0.8, delay: 0.6, ease: [0.42, 0, 0.58, 1] }}
         >
           Book Your Free Demo

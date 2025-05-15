@@ -97,7 +97,7 @@ export default function Portfolio() {
   };
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 bg-slate-100"> {/* Slightly updated background */}
+    <section ref={sectionRef} className="py-16 md:py-24 bg-primary-light/10"> {/* Using a light tint of primary color */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -105,7 +105,7 @@ export default function Portfolio() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-slate-800">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-neutral-800">
             Transforming Businesses, One Pixel at a Time
           </h2>
         </motion.div>
@@ -129,11 +129,18 @@ export default function Portfolio() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
                 <div className="p-6 md:p-8 flex-grow flex flex-col"> {/* Flex grow for content to push footer down */}
-                  <h3 className="text-xl md:text-2xl font-semibold mb-2 text-indigo-700 group-hover:text-indigo-500 transition-colors duration-300">{project.title}</h3>
-                  <p className="text-xs text-slate-500 mb-3 uppercase tracking-wider">{project.category}</p>
-                  <p className="text-slate-600 leading-relaxed mb-auto">{project.description}</p> {/* mb-auto pushes links to bottom */}
+                  <h3 className="text-xl md:text-2xl font-semibold mb-2 text-primary-dark group-hover:text-primary-DEFAULT transition-colors duration-300">{project.title}</h3>
+                  <p className="text-xs text-neutral-500 mb-3 uppercase tracking-wider">{project.category}</p>
+                  <p className="text-neutral-600 leading-relaxed mb-auto">{project.description}</p> {/* mb-auto pushes links to bottom */}
                   <div className="mt-6 flex space-x-4">
-                    <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="text-indigo-600 hover:text-indigo-500 font-medium transition-colors duration-300 text-sm">View Live Site &rarr;</a>
+                    <a 
+                      href={project.liveLink} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="text-accent-DEFAULT hover:text-accent-dark font-medium transition-colors duration-300 text-sm"
+                    >
+                      View Live Site &rarr;
+                    </a>
                     {/* <a href={project.caseStudyLink} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-500 font-medium transition-colors duration-300 text-sm">Case Study</a> */}
                   </div>
                 </div>

@@ -17,25 +17,24 @@ const testimonialsData = [
     id: 1,
     quote: "PixelRush completely transformed our online presence. The new site is not only beautiful but also incredibly fast and has doubled our lead generation in just a month! The 3-day delivery was unbelievable.",
     name: "Amanda Chen",
-    title: "Founder, Bloom & Grow Florists",
-    // Using a simple, generic placeholder for logos. Replace with actual client logos.
-    logoComponent: <div className="w-24 h-10 bg-slate-200 flex items-center justify-center rounded text-slate-500 text-xs">Bloom & Grow</div>,
+    title: "Founder",
+    company: "Bloom & Grow Florists",
     rating: 5,
   },
   {
     id: 2,
     quote: "We were struggling with an outdated website that wasn't mobile-friendly. PixelRush delivered a sleek, modern, mobile-first design that our customers love. Their process is efficient and highly professional.",
     name: "David Miller",
-    title: "Owner, The Local Grind Cafe",
-    logoComponent: <div className="w-24 h-10 bg-slate-200 flex items-center justify-center rounded text-slate-500 text-xs">Local Grind</div>,
+    title: "Owner",
+    company: "The Local Grind Cafe",
     rating: 5,
   },
   {
     id: 3,
     quote: "The team at PixelRush is fantastic. They understood our needs perfectly and delivered a high-converting landing page that exceeded our expectations. The best part? It was live in 3 days as promised!",
     name: "Jessica Lee",
-    title: "Marketing Manager, Nova Real Estate",
-    logoComponent: <div className="w-24 h-10 bg-slate-200 flex items-center justify-center rounded text-slate-500 text-xs">Nova Real Estate</div>,
+    title: "Marketing Manager",
+    company: "Nova Real Estate",
     rating: 5,
   },
 ];
@@ -63,7 +62,7 @@ export default function Testimonials() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-indigo-700 text-white"> {/* Slightly darker indigo for contrast */}
+    <section className="py-16 md:py-24 bg-gradient-to-br from-primary-dark via-mediumBlue-dark to-secondary-dark text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
@@ -79,27 +78,28 @@ export default function Testimonials() {
           {testimonialsData.map((testimonial, index) => (
             <motion.div 
               key={testimonial.id}
-              className="bg-white/10 backdrop-blur-md p-6 md:p-8 rounded-xl shadow-2xl flex flex-col" // Using bg-opacity and backdrop-blur for a modern effect
-              custom={index} // Pass index for staggered animation
+              className="bg-white/10 backdrop-blur-lg p-6 md:p-8 rounded-xl shadow-2xl flex flex-col ring-1 ring-white/20"
+              custom={index}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }} // Trigger when 30% of card is visible
+              viewport={{ once: true, amount: 0.3 }}
               variants={cardVariants}
             >
               <div className="mb-5">
-                <StarRating rating={testimonial.rating} starColor="text-yellow-300" />
+                <StarRating rating={testimonial.rating} starColor="text-accent-DEFAULT" />
               </div>
-              <p className="text-base md:text-lg italic mb-6 leading-relaxed text-indigo-100 flex-grow">
-                {/* Using &ldquo; and &rdquo; for proper quotation marks */}
+              <p className="text-base md:text-lg italic mb-6 leading-relaxed text-neutral-100 flex-grow">
                 &ldquo;{testimonial.quote}&rdquo;
               </p>
               <div className="flex items-center mt-auto pt-4 border-t border-white/20">
-                <div className="mr-4">
-                  {testimonial.logoComponent} {/* Render the logo component */}
-                </div>
-                <div>
-                  <p className="font-semibold text-base md:text-lg">{testimonial.name}</p>
-                  <p className="text-sm text-indigo-200 opacity-90">{testimonial.title}</p>
+                <div className="flex items-center mt-6">
+                  <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center mr-4">
+                    <span className="text-xl font-bold text-white/80">{testimonial.company.charAt(0)}</span>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-white">{testimonial.name}</p>
+                    <p className="text-sm text-neutral-300 opacity-90">{testimonial.title}, {testimonial.company}</p>
+                  </div>
                 </div>
               </div>
             </motion.div>

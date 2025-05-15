@@ -17,16 +17,38 @@ module.exports = {
         // display: ['Manrope', ...defaultTheme.fontFamily.sans],
       },
       colors: {
-        // Define a primary color palette for the brand
+        // New color palette
+        mediumBlue: {
+          light: '#60A5FA', // blue-400
+          DEFAULT: '#3B82F6', // blue-500
+          dark: '#2563EB',  // blue-600
+        },
+        brandCyan: {
+          light: '#22D3EE', // cyan-400
+          DEFAULT: '#06B6D4', // cyan-500
+          dark: '#0891B2',  // cyan-600
+        },
+        brightOrange: {
+          light: '#FB923C', // orange-400
+          DEFAULT: '#F97316', // orange-500
+          dark: '#EA580C',  // orange-600
+        },
+        
+        // Updated primary and secondary colors to use the new palette
         primary: {
-          light: '#6D28D9', // Lighter shade of Indigo/Purple
-          DEFAULT: '#5B21B6', // Main Indigo/Purple (adjust as needed)
-          dark: '#4C1D95',  // Darker shade
+          light: '#60A5FA', // mediumBlue-light
+          DEFAULT: '#3B82F6', // mediumBlue-DEFAULT
+          dark: '#2563EB',  // mediumBlue-dark
         },
         secondary: {
-          light: '#EC4899', // Lighter Pink/Magenta
-          DEFAULT: '#D946EF', // Main Pink/Magenta
-          dark: '#C026D3',   // Darker shade
+          light: '#22D3EE', // brandCyan-light
+          DEFAULT: '#06B6D4', // brandCyan-DEFAULT
+          dark: '#0891B2',   // brandCyan-dark
+        },
+        accent: {
+          light: '#FB923C', // brightOrange-light
+          DEFAULT: '#F97316', // brightOrange-DEFAULT
+          dark: '#EA580C',  // brightOrange-dark
         },
         // Neutral colors - extending Tailwind's slate for consistency
         neutral: defaultTheme.colors.slate,
