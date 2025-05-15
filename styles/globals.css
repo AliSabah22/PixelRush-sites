@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Add any global styles here */
+body {
+  /* Placeholder for a nice background or font */
+  font-family: sans-serif; /* We will update this in tailwind.config.js */
+  color: #333;
+}
+
+/* Example of a custom class if not using Tailwind utilities for everything */
+.custom-class {
+  /* your styles */
+} 
