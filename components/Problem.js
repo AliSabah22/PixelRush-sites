@@ -77,7 +77,7 @@ export default function Problem() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-slate-50"> {/* Updated background color */}
+    <section className="py-16 md:py-24 bg-secondary-light/10"> {/* Changed from bg-slate-50 */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8"> {/* Responsive padding */}
         <motion.div
           initial="hidden"
@@ -85,7 +85,7 @@ export default function Problem() {
           viewport={{ once: true, amount: 0.2 }} // Trigger animation when 20% of the element is in view
           variants={sectionVariants}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-slate-800">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-primary-dark"> {/* Changed from text-slate-800 */}
             Is Your Website Holding You Back?
           </h2>
         </motion.div>

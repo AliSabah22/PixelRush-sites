@@ -44,7 +44,7 @@ export default function Solution() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-white"> 
+    <section className="py-16 md:py-24 bg-primary-light/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8"> 
         <motion.div
           initial="hidden"
@@ -52,7 +52,7 @@ export default function Solution() {
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-neutral-800">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-primary-dark">
             PixelRush: Your Shortcut to a Killer Website
           </h2>
         </motion.div>
@@ -60,14 +60,14 @@ export default function Solution() {
           {solutionsData.map((solution, index) => (
             <motion.div 
               key={index}
-              className="bg-neutral-50 p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1" // Subtle hover lift
+              className="bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1"
               custom={index}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }} // Trigger when 20% of the card is visible
+              viewport={{ once: true, amount: 0.2 }}
               variants={cardVariants}
             >
-              <div className="flex justify-start mb-4"> {/* Icon aligned left */}
+              <div className="flex justify-start mb-4">
                 {solution.icon}
               </div>
               <div>
