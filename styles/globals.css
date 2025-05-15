@@ -1,13 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Add any global styles here */
+/* Global styles */
 body {
-  /* Placeholder for a nice background or font */
-  font-family: sans-serif; /* We will update this in tailwind.config.js */
-  color: #333;
+  /* font-family: 'Inter', sans-serif; /* Set in tailwind.config.js */
+  /* Default text color - can be overridden by components */
+  color: theme('colors.slate.700'); 
+  background-color: theme('colors.white');
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+/* Example of a custom utility or component style */
+.section-padding {
+  @apply py-16 md:py-24;
+}
+
+/* Add a container class for consistent max-width and padding (alternative to repeating in each section) */
+.container-global {
+  @apply container mx-auto px-4 sm:px-6 lg:px-8;
+}
+
+/* Headings default styling (optional, can be handled by Tailwind utility classes directly) */
+h1, h2, h3, h4, h5, h6 {
+  /* font-family: theme('fontFamily.display'); /* If using a separate display font */
+  /* color: theme('colors.neutral.800'); */
+}
+
+/* Custom scrollbar (optional, for aesthetics - might not work in all browsers e.g. Firefox) */
+/* ::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: theme('colors.neutral.100');
+}
+::-webkit-scrollbar-thumb {
+  background: theme('colors.primary.DEFAULT');
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.primary.dark');
+} */
 
 /* Example of a custom class if not using Tailwind utilities for everything */
 .custom-class {

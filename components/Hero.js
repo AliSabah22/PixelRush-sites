@@ -1,61 +1,89 @@
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei'; // Placeholder controls
+import { useRef, useEffect, useMemo } from 'react';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { Points, PointMaterial } from '@react-three/drei';
 import { motion } from 'framer-motion';
+import * as THREE from 'three';
 
-// Placeholder for a simple 3D scene
-function Scene() {
+// Component for the 3D animated background
+function AnimatedBackground() {
+  const pointsRef = useRef();
+
+  // Generate random positions for the points
+  const count = 5000;
+  const positions = useMemo(() => {
+    const pos = new Float32Array(count * 3);
+    for (let i = 0; i < count * 3; i++) {
+      pos[i] = (Math.random() - 0.5) * 10; // Distribute points in a 10x10x10 cube
+    }
+    return pos;
+  }, [count]);
+
+  // Animation logic for the points
+  useFrame((state, delta) => {
+    if (pointsRef.current) {
+      pointsRef.current.rotation.x += delta * 0.02;
+      pointsRef.current.rotation.y += delta * 0.03;
+      // Add subtle mouse tracking effect if desired
+      // pointsRef.current.rotation.y = THREE.MathUtils.lerp(pointsRef.current.rotation.y, (state.mouse.x * Math.PI) / 10, 0.01);
+      // pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, (state.mouse.y * Math.PI) / 10, 0.01);
+    }
+  });
+
   return (
-    <mesh>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color="orange" />
-    </mesh>
+    // Points are generally more performant for large numbers of particles
+    <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
+      <PointMaterial
+        transparent
+        color="#ffffff"
+        size={0.015}
+        sizeAttenuation={true}
+        depthWrite={false}
+      />
+    </Points>
   );
 }
 
 export default function Hero() {
   return (
-    <section className="relative h-screen flex flex-col items-center justify-center text-center text-white bg-gray-900">
-      <div className="absolute inset-0 z-0">
-        {/* <Canvas>
+    <section className="relative h-screen flex flex-col items-center justify-center text-center text-white overflow-hidden">
+      {/* 3D Animated Background */}
+      <div className="absolute inset-0 z-0 bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900">
+        <Canvas camera={{ position: [0, 0, 2] }}>
           <ambientLight intensity={0.5} />
-          <pointLight position={[10, 10, 10]} />
-          <Scene />
-          <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
-        </Canvas> */}
-        {/* Placeholder for 3D background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 opacity-70"></div>
-        <p className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-300 text-sm">[3D Animated Background Placeholder]</p>
+          <AnimatedBackground />
+        </Canvas>
       </div>
 
+      {/* Content Overlay */}
       <motion.div 
-        className="relative z-10 p-8"
-        initial={{ opacity: 0, y: 20 }}
+        className="relative z-10 p-6 md:p-8 max-w-3xl mx-auto" // Added max-width for better text readability on large screens
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeInOut" }}
+        transition={{ duration: 0.8, ease: [0.42, 0, 0.58, 1] }} // Using a cubic bezier for smoother easing
       >
         <motion.h1 
-          className="text-5xl md:text-7xl font-bold mb-6"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight" // Responsive text sizes & tight leading
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: "easeInOut" }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.42, 0, 0.58, 1] }}
         >
           Websites That Actually Sell
         </motion.h1>
         <motion.p 
-          className="text-xl md:text-2xl mb-8"
+          className="text-lg sm:text-xl md:text-2xl mb-10 text-gray-200" // Adjusted text size and color for better contrast
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4, ease: "easeInOut" }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.42, 0, 0.58, 1] }}
         >
-          Delivered in 3 days. Mobile-first. Made to convert.
+          PixelRush delivers high-converting, mobile-first websites in just 3 days. Ready to elevate your brand?
         </motion.p>
         <motion.button 
-          className="bg-white text-gray-900 font-semibold py-3 px-8 rounded-lg shadow-lg hover:bg-gray-200 transition-colors duration-300 text-lg"
-          whileHover={{ scale: 1.05 }}
+          className="bg-indigo-500 text-white font-semibold py-3 px-8 md:py-4 md:px-10 rounded-lg shadow-lg hover:bg-indigo-400 transition-colors duration-300 text-base md:text-lg focus:outline-none focus:ring-2 focus:ring-indigo-300 focus:ring-opacity-50"
+          whileHover={{ scale: 1.05, boxShadow: "0px 10px 20px rgba(79, 70, 229, 0.4)" }}
           whileTap={{ scale: 0.95 }}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6, ease: "easeInOut" }}
+          transition={{ duration: 0.8, delay: 0.6, ease: [0.42, 0, 0.58, 1] }}
         >
           Book Your Free Demo
         </motion.button>
