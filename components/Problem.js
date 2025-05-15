@@ -77,7 +77,7 @@ export default function Problem() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-secondary-light/10"> {/* Changed from bg-slate-50 */}
+    <section id="problem" className="py-16 md:py-24 bg-secondary-light/10"> {/* Changed from bg-slate-50 */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8"> {/* Responsive padding */}
         <motion.div
           initial="hidden"

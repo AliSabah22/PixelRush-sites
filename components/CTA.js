@@ -78,12 +78,26 @@ export default function CTA() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
+            onClick={() => {
+              if (typeof window !== 'undefined' && window.Calendly) {
+                window.Calendly.initPopupWidget({
+                  url: 'https://calendly.com/your-calendly-link'
+                });
+              }
+            }}
           >
             <span className="relative z-10">Book Your <span className="underline decoration-white/80 decoration-2 underline-offset-2">Free Demo</span></span>
             <svg className="w-6 h-6 text-white/80 z-10" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
             {/* Glowing blue border */}
             <span className="absolute inset-0 rounded-xl pointer-events-none" style={{ boxShadow: '0 0 32px 0 rgba(59, 130, 246, 0.35)' }} />
           </motion.button>
+          {/* Calendly Inline Widget */}
+          <div
+            className="calendly-inline-widget mt-8 w-full max-w-2xl mx-auto rounded-xl overflow-hidden shadow-lg"
+            data-url="https://calendly.com/amplifyace/15"
+            style={{ minWidth: 320, height: 700 }}
+            id="calendly-inline"
+          ></div>
           {/* Trust Row */}
           <div className="flex flex-col items-center mt-10">
             <div className="flex items-center gap-1 mb-2">

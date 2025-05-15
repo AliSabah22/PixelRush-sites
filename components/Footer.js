@@ -67,11 +67,11 @@ export default function Footer() {
             <h4 className="text-lg font-semibold text-neutral-200 mb-5">Explore</h4>
             <ul className="space-y-3 text-sm">
               {/* These links should ideally scroll to sections or navigate to pages */}
-              <li><a href="#hero" className="hover:text-secondary-DEFAULT transition-colors">Home</a></li>
-              <li><a href="#problem" className="hover:text-secondary-DEFAULT transition-colors">The Problem</a></li>
-              <li><a href="#solution" className="hover:text-secondary-DEFAULT transition-colors">Our Solution</a></li>
-              <li><a href="#portfolio" className="hover:text-secondary-DEFAULT transition-colors">Our Work</a></li>
-              <li><a href="#testimonials" className="hover:text-secondary-DEFAULT transition-colors">Testimonials</a></li>
+              <li><a href="#hero" onClick={(e) => { e.preventDefault(); document.getElementById('hero').scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-secondary-DEFAULT transition-colors">Home</a></li>
+              <li><a href="#problem" onClick={(e) => { e.preventDefault(); document.getElementById('problem').scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-secondary-DEFAULT transition-colors">The Problem</a></li>
+              <li><a href="#solution" onClick={(e) => { e.preventDefault(); document.getElementById('solution').scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-secondary-DEFAULT transition-colors">Our Solution</a></li>
+              <li><a href="#portfolio" onClick={(e) => { e.preventDefault(); document.getElementById('portfolio').scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-secondary-DEFAULT transition-colors">Our Work</a></li>
+              <li><a href="#testimonials" onClick={(e) => { e.preventDefault(); document.getElementById('testimonials').scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-secondary-DEFAULT transition-colors">Testimonials</a></li>
             </ul>
           </motion.div>
 

@@ -6,8 +6,44 @@ import * as THREE from 'three';
 import AnimatedBackground from './AnimatedBackground';
 
 export default function Hero() {
+  // Helper to load Calendly badge widget on demand
+  const handleCalendlyClick = () => {
+    // Load Calendly CSS if not already present
+    if (!document.getElementById('calendly-widget-css')) {
+      const link = document.createElement('link');
+      link.id = 'calendly-widget-css';
+      link.rel = 'stylesheet';
+      link.href = 'https://assets.calendly.com/assets/external/widget.css';
+      document.head.appendChild(link);
+    }
+    // Load Calendly script if not already present
+    if (!window.Calendly) {
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      script.onload = () => {
+        if (window.Calendly) {
+          window.Calendly.initBadgeWidget({
+            url: 'https://calendly.com/amplifyace/15',
+            text: 'Schedule time with me',
+            color: '#0069ff',
+            textColor: '#ffffff'
+          });
+        }
+      };
+      document.body.appendChild(script);
+    } else {
+      window.Calendly.initBadgeWidget({
+        url: 'https://calendly.com/amplifyace/15',
+        text: 'Schedule time with me',
+        color: '#0069ff',
+        textColor: '#ffffff'
+      });
+    }
+  };
+
   return (
-    <section className="relative h-screen flex flex-col items-center justify-center text-center text-white overflow-hidden">
+    <section id="hero" className="relative h-screen flex flex-col items-center justify-center text-center text-white overflow-hidden">
       {/* 3D Animated Background */}
       <div className="absolute inset-0 z-0 bg-gradient-to-br from-black via-gray-900 to-black">
         <Canvas camera={{ position: [0, 0, 2] }}>
@@ -51,6 +87,7 @@ export default function Hero() {
               boxShadow: "0px 10px 20px rgba(249, 115, 22, 0.4)"
             }}
             transition={{ duration: 0.8, delay: 0.6, ease: [0.42, 0, 0.58, 1] }}
+            onClick={handleCalendlyClick}
           >
             <span className="relative z-10">Book Your <span className="underline decoration-white/60 decoration-2 underline-offset-2">Free Demo</span></span>
             {/* Animated shimmer overlay */}

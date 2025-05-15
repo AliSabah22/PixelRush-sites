@@ -97,7 +97,7 @@ export default function Portfolio() {
   };
 
   return (
-    <section ref={sectionRef} className="py-16 md:py-24 bg-primary-light/10"> {/* Using a light tint of primary color */}
+    <section id="portfolio" ref={sectionRef} className="py-16 md:py-24 bg-primary-light/10"> {/* Using a light tint of primary color */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

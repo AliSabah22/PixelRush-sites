@@ -44,7 +44,7 @@ export default function Solution() {
   };
 
   return (
-    <section className="py-16 md:py-24 bg-primary-light/10">
+    <section id="solution" className="py-16 md:py-24 bg-primary-light/10">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8"> 
         <motion.div
           initial="hidden"

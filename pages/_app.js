@@ -2,6 +2,7 @@
 import '../styles/globals.css';
 import { useEffect } from 'react';
 import Lenis from 'lenis';
+import Script from 'next/script';
 
 // Custom hook to manage Lenis smooth scrolling
 function useSmoothScroll() {
@@ -34,12 +35,37 @@ function useSmoothScroll() {
   }, []);
 }
 
+// Custom hook to initialize Calendly
+function useCalendly() {
+  useEffect(() => {
+    // Initialize Calendly inline widget
+    if (typeof window !== 'undefined' && window.Calendly) {
+      window.Calendly.initInlineWidget({
+        url: 'https://calendly.com/your-calendly-link',
+        parentElement: document.getElementById('calendly-inline'),
+        prefill: {},
+        utm: {}
+      });
+    }
+  }, []);
+}
+
 // Main App component
 function MyApp({ Component, pageProps }) {
   // Initialize smooth scrolling
   useSmoothScroll();
+  // Initialize Calendly
+  useCalendly();
 
-  return <Component {...pageProps} />;
+  return (
+    <>
+      <Script 
+        src="https://assets.calendly.com/assets/external/widget.js" 
+        strategy="lazyOnload"
+      />
+      <Component {...pageProps} />
+    </>
+  );
 }
 
 export default MyApp; 
