@@ -14,7 +14,7 @@ const projectsData = [
     // Using Unsplash for more realistic placeholders - replace with actual project images
     imageUrl: "https://images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop&auto=format", 
     description: "A sleek, patient-focused website for a modern dental clinic, featuring online appointment booking and clear service showcases. Resulted in a 40% increase in new patient inquiries.",
-    liveLink: "#", // Placeholder for live site
+    liveLink: "/dental-clinic", // Updated to point to the new dental clinic landing page
     caseStudyLink: "#" // Placeholder for case study
   },
   {
@@ -111,42 +111,64 @@ export default function Portfolio() {
         </motion.div>
         {/* Grid for portfolio items - responsive columns */}
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-          {projectsData.map((project) => (
-            <div key={project.id} ref={addToRefs} className="opacity-0"> {/* Initial opacity-0 for GSAP */}
-              <motion.div
-                className="bg-white rounded-xl shadow-lg overflow-hidden group flex flex-col h-full" // Ensure cards take full height for consistent alignment
-                whileHover={{ y: -10, boxShadow: "0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)" }} // Enhanced hover effect
-                transition={{ type: "spring", stiffness: 260, damping: 20 }} // Spring animation for hover
-              >
-                <div className="relative h-64 w-full overflow-hidden md:h-72">
-                  <img 
-                    src={project.imageUrl} 
-                    alt={`Showcase of ${project.title}`}
-                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                    loading="lazy" // Lazy load images for performance
-                  />
-                  {/* Overlay for text or additional hover effects if needed */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
-                <div className="p-6 md:p-8 flex-grow flex flex-col"> {/* Flex grow for content to push footer down */}
-                  <h3 className="text-xl md:text-2xl font-semibold mb-2 text-primary-dark group-hover:text-primary-DEFAULT transition-colors duration-300">{project.title}</h3>
-                  <p className="text-xs text-neutral-500 mb-3 uppercase tracking-wider">{project.category}</p>
-                  <p className="text-neutral-600 leading-relaxed mb-auto">{project.description}</p> {/* mb-auto pushes links to bottom */}
-                  <div className="mt-6 flex space-x-4">
-                    <a 
-                      href={project.liveLink} 
-                      target="_blank" 
-                      rel="noopener noreferrer" 
-                      className="text-accent-DEFAULT hover:text-accent-dark font-medium transition-colors duration-300 text-sm"
-                    >
-                      View Live Site &rarr;
-                    </a>
-                    {/* <a href={project.caseStudyLink} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-500 font-medium transition-colors duration-300 text-sm">Case Study</a> */}
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          ))}
+          {projectsData.map((project) => {
+            // If liveLink is not a placeholder, make the whole card clickable
+            const isClickable = project.liveLink && project.liveLink !== '#';
+            const CardWrapper = isClickable ? 'a' : 'div';
+            const cardProps = isClickable
+              ? {
+                  href: project.liveLink,
+                  target: '_blank',
+                  rel: 'noopener noreferrer',
+                  className: 'block group',
+                  style: { textDecoration: 'none' },
+                }
+              : { className: 'group' };
+            return (
+              <div key={project.id} ref={addToRefs} className="opacity-0"> {/* Initial opacity-0 for GSAP */}
+                {/*
+                  CardWrapper is 'a' if the card should be clickable, otherwise 'div'.
+                  This makes the entire card a template for the niche, linking to the correlated website.
+                  The 'View Live Site' link remains for accessibility/SEO.
+                */}
+                <CardWrapper {...cardProps}>
+                  <motion.div
+                    className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col h-full transition-transform duration-300" // Removed group for hover, now on wrapper
+                    whileHover={isClickable ? { y: -10, boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)' } : {}}
+                    transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                  >
+                    <div className="relative h-64 w-full overflow-hidden md:h-72">
+                      <img 
+                        src={project.imageUrl} 
+                        alt={`Showcase of ${project.title}`}
+                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
+                        loading="lazy" // Lazy load images for performance
+                      />
+                      {/* Overlay for text or additional hover effects if needed */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                    <div className="p-6 md:p-8 flex-grow flex flex-col"> {/* Flex grow for content to push footer down */}
+                      <h3 className="text-xl md:text-2xl font-semibold mb-2 text-primary-dark group-hover:text-primary-DEFAULT transition-colors duration-300">{project.title}</h3>
+                      <p className="text-xs text-neutral-500 mb-3 uppercase tracking-wider">{project.category}</p>
+                      <p className="text-neutral-600 leading-relaxed mb-auto">{project.description}</p> {/* mb-auto pushes links to bottom */}
+                      <div className="mt-6 flex space-x-4">
+                        <a 
+                          href={project.liveLink} 
+                          target="_blank" 
+                          rel="noopener noreferrer" 
+                          className="text-accent-DEFAULT hover:text-accent-dark font-medium transition-colors duration-300 text-sm underline"
+                          tabIndex={isClickable ? -1 : 0} // If card is clickable, skip link in tab order
+                        >
+                          View Live Site &rarr;
+                        </a>
+                        {/* <a href={project.caseStudyLink} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-500 font-medium transition-colors duration-300 text-sm">Case Study</a> */}
+                      </div>
+                    </div>
+                  </motion.div>
+                </CardWrapper>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

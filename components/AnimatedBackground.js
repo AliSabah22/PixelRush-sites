@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Points, PointMaterial } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
@@ -6,14 +6,15 @@ import * as THREE from 'three';
 // Reusable 3D animated particle background
 export default function AnimatedBackground({ color = '#888888', count = 5000 }) {
   const pointsRef = useRef();
+  const [positions, setPositions] = useState();
 
-  // Generate random positions for the points
-  const positions = useMemo(() => {
+  useEffect(() => {
+    // Only run on client
     const pos = new Float32Array(count * 3);
     for (let i = 0; i < count * 3; i++) {
       pos[i] = (Math.random() - 0.5) * 10;
     }
-    return pos;
+    setPositions(pos);
   }, [count]);
 
   // Animation logic for the points
@@ -26,6 +27,9 @@ export default function AnimatedBackground({ color = '#888888', count = 5000 }) 
       // pointsRef.current.rotation.x = THREE.MathUtils.lerp(pointsRef.current.rotation.x, (state.mouse.y * Math.PI) / 10, 0.01);
     }
   });
+
+  // Don't render until positions are set (client only)
+  if (!positions) return null;
 
   return (
     <Points ref={pointsRef} positions={positions} stride={3} frustumCulled={false}>
