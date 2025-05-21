@@ -1,8 +1,10 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import ScrollAnimation from './ScrollAnimation';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -49,132 +51,93 @@ const projectsData = [
 ];
 
 // Portfolio Section Component
-export default function Portfolio() {
+const Portfolio = () => {
   const router = useRouter();
   const sectionRef = useRef(null);
-  // Ref to store an array of card elements for GSAP animations
-  const cardsRef = useRef([]);
-  cardsRef.current = []; // Ensure it's reset on re-renders before collecting refs
+  const projectsRef = useRef([]);
 
   useEffect(() => {
-    const stInstances = []; // Array to store ScrollTrigger instances
-
-    cardsRef.current.forEach((card, index) => {
-      const tween = gsap.fromTo(card, 
-        { opacity: 0, y: 60, scale: 0.95 }, // Initial state: slightly scaled down and moved down
-        { // Target state
-          opacity: 1, 
-          y: 0, 
-          scale: 1,
-          duration: 0.8, // Animation duration
-          delay: index * 0.15, // Staggered delay for a cascading effect
-          ease: "power3.out", // Smooth easing function
-          scrollTrigger: {
-            trigger: card, // Element that triggers the animation
-            start: "top 85%", // Animation starts when the top of the card is 85% from the top of the viewport
-            end: "bottom 20%", // Optional: define an end point for scrubbing or other actions
-            toggleActions: "play none none none", // Defines how animation behaves on scroll events (play once on enter)
-            once: true, // Ensures the animation only runs once
-            // markers: process.env.NODE_ENV === "development", // Uncomment for debug markers in development
-          }
-        }
-      );
-      // Store the ScrollTrigger instance from the tween
-      if (tween.scrollTrigger) {
-        stInstances.push(tween.scrollTrigger);
-      }
-    });
-    // Cleanup ScrollTrigger instances on component unmount
-    return () => {
-      stInstances.forEach(st => {
-        st.kill(); // Kill each stored ScrollTrigger instance
+    const projects = projectsRef.current;
+    
+    projects.forEach((project, index) => {
+      gsap.from(project, {
+        scrollTrigger: {
+          trigger: project,
+          start: 'top bottom-=100',
+          toggleActions: 'play none none reverse'
+        },
+        y: 50,
+        opacity: 0,
+        duration: 0.8,
+        delay: index * 0.2
       });
+    });
+
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
-  // Function to add individual card elements to the cardsRef array
-  const addToRefs = (el) => {
-    if (el && !cardsRef.current.includes(el)) {
-      cardsRef.current.push(el);
-    }
-  };
-
-  const handleCardClick = (link) => {
-    if (link && link !== '#') {
-      router.push(link);
-    }
+  const handleProjectClick = (link) => {
+    router.push(link);
   };
 
   return (
-    <section id="portfolio" ref={sectionRef} className="py-16 md:py-24 bg-primary-light/10"> {/* Using a light tint of primary color */}
+    <section id="portfolio" className="py-16 md:py-24 bg-gradient-to-br from-primary-dark via-mediumBlue-dark to-secondary-dark text-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <ScrollAnimation>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-white">
-            Transforming Businesses, One Pixel at a Time
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+        >
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20">
+            Our Recent Work
           </h2>
-        </ScrollAnimation>
-        {/* Grid for portfolio items - responsive columns */}
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
-          {projectsData.map((project) => {
-            // If liveLink is not a placeholder, make the whole card clickable
-            const isClickable = project.liveLink && project.liveLink !== '#';
-            const CardWrapper = isClickable ? 'div' : 'div';
-            const cardProps = isClickable
-              ? {
-                  onClick: () => handleCardClick(project.liveLink),
-                  className: 'block group cursor-pointer',
-                  style: { textDecoration: 'none' },
-                }
-              : { className: 'group' };
-            return (
-              <div key={project.id} ref={addToRefs} className="opacity-0"> {/* Initial opacity-0 for GSAP */}
-                {/*
-                  CardWrapper is 'a' if the card should be clickable, otherwise 'div'.
-                  This makes the entire card a template for the niche, linking to the correlated website.
-                  The 'View Live Site' link remains for accessibility/SEO.
-                */}
-                <CardWrapper {...cardProps}>
-                  <motion.div
-                    className="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col h-full transition-transform duration-300" // Removed group for hover, now on wrapper
-                    whileHover={isClickable ? { y: -10, boxShadow: '0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04)' } : {}}
-                    transition={{ type: 'spring', stiffness: 260, damping: 20 }}
-                  >
-                    <div className="relative h-64 w-full overflow-hidden md:h-72">
-                      <img 
-                        src={project.imageUrl} 
-                        alt={`Showcase of ${project.title}`}
-                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500 ease-in-out"
-                        loading="lazy" // Lazy load images for performance
-                      />
-                      {/* Overlay for text or additional hover effects if needed */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                    </div>
-                    <div className="p-6 md:p-8 flex-grow flex flex-col"> {/* Flex grow for content to push footer down */}
-                      <h3 className="text-xl md:text-2xl font-semibold mb-2 text-primary-dark group-hover:text-primary-DEFAULT transition-colors duration-300">{project.title}</h3>
-                      <p className="text-xs text-neutral-500 mb-3 uppercase tracking-wider">{project.category}</p>
-                      <p className="text-neutral-600 leading-relaxed mb-auto">{project.description}</p> {/* mb-auto pushes links to bottom */}
-                      <div className="mt-6 flex space-x-4">
-                        <a 
-                          href={project.liveLink} 
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleCardClick(project.liveLink);
-                          }}
-                          className="text-accent-DEFAULT hover:text-accent-dark font-medium transition-colors duration-300 text-sm underline"
-                          tabIndex={isClickable ? -1 : 0}
-                        >
-                          View Live Site &rarr;
-                        </a>
-                        {/* <a href={project.caseStudyLink} target="_blank" rel="noopener noreferrer" className="text-slate-600 hover:text-slate-500 font-medium transition-colors duration-300 text-sm">Case Study</a> */}
-                      </div>
-                    </div>
-                  </motion.div>
-                </CardWrapper>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projectsData.map((project, index) => (
+            <motion.div
+              key={project.title}
+              ref={el => projectsRef.current[index] = el}
+              className="card group cursor-pointer"
+              whileHover={{ y: -10 }}
+              onClick={() => handleProjectClick(project.liveLink)}
+            >
+              <div className="relative aspect-video mb-6 overflow-hidden rounded-lg">
+                <img
+                  src={project.imageUrl}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                />
               </div>
-            );
-          })}
+              <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+              <p className="text-white/70 mb-4">{project.description}</p>
+              <div className="flex flex-wrap gap-2">
+                <span
+                  className="px-3 py-1 bg-white/5 rounded-full text-sm text-white/80"
+                >
+                  {project.category}
+                </span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="text-center mt-16">
+          <motion.button
+            className="btn-primary"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => handleProjectClick('/portfolio')}
+          >
+            View All Projects
+          </motion.button>
         </div>
       </div>
     </section>
   );
-} 
+};
+
+export default Portfolio; 

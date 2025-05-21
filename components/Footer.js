@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 
 // Placeholder Social Icons - Consider using a library like react-icons or custom SVGs

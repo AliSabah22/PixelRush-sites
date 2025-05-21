@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 
 // Star Rating Component (no changes needed, but ensure it's visually appealing)

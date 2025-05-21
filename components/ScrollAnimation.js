@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 
 const ScrollAnimation = ({ children, className = "", delay = 0 }) => {

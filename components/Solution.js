@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 
 // Placeholder icons: Consider using a library like Heroicons.

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect, useRef } from 'react';
 import shaderCode from './shader';
 import { Renderer, Store, PointerHandler, Editor } from './shaderUtils';
