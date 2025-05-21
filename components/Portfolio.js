@@ -3,6 +3,7 @@ import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useRouter } from 'next/router';
+import ScrollAnimation from './ScrollAnimation';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -107,16 +108,11 @@ export default function Portfolio() {
   return (
     <section id="portfolio" ref={sectionRef} className="py-16 md:py-24 bg-primary-light/10"> {/* Using a light tint of primary color */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
-        >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-neutral-800">
+        <ScrollAnimation>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-white">
             Transforming Businesses, One Pixel at a Time
           </h2>
-        </motion.div>
+        </ScrollAnimation>
         {/* Grid for portfolio items - responsive columns */}
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-10 md:gap-12">
           {projectsData.map((project) => {

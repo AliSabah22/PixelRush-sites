@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import AnimatedBackground from './AnimatedBackground';
 import { Canvas } from '@react-three/fiber';
 import { useEffect } from 'react';
+import ScrollAnimation from './ScrollAnimation';
 
 // Call to Action Section Component
 export default function CTA() {

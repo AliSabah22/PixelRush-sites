@@ -166,13 +166,21 @@ export default function Hero() {
         <div className="flex flex-col items-center gap-8 max-w-4xl mx-auto">
           {/* Headline */}
           <motion.h1 
-            className="text-4xl md:text-6xl font-bold text-white text-center leading-tight"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.5 }}
           >
-            Build Bold. Launch Loud. <br className="hidden md:block" /> Scale with Pixelrush.
+            PixelRush: Your Shortcut to a Killer Website
           </motion.h1>
+          <motion.p 
+            className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
+            Transforming Businesses, One Pixel at a Time
+          </motion.p>
 
           {/* Scramble Text Box */}
           <motion.div 

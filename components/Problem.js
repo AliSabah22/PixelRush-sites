@@ -78,44 +78,48 @@ export default function Problem() {
   };
 
   return (
-    <section id="problem" className="py-16 md:py-24 bg-secondary-light/10">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="problem" className="py-16 md:py-24 relative">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-primary-dark">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-white">
             Is Your Website Holding You Back?
           </h2>
         </motion.div>
         
-        <div className="grid md:grid-cols-2 gap-12 items-center">
+        <div className="grid md:grid-cols-2 gap-12 items-center relative">
           {/* Left side - Shader Animation */}
-          <div className="h-[600px] rounded-xl overflow-hidden shadow-2xl">
+          <div className="h-[600px] rounded-xl overflow-hidden shadow-2xl relative z-0">
             <ShaderAnimation />
           </div>
 
           {/* Right side - stacked cards */}
-          <div className="space-y-6">
+          <div className="space-y-6 relative z-10 perspective-1000">
             {problemCards.map((point, index) => (
               <motion.div 
                 key={index}
-                className="bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
+                className="bg-white/10 backdrop-blur-sm p-6 md:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:rotate-x-2 hover:rotate-y-2 hover:scale-105"
                 custom={index}
                 initial="hidden"
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.3 }}
                 variants={cardVariants}
+                style={{
+                  transformStyle: 'preserve-3d',
+                  boxShadow: '0 10px 30px -15px rgba(0, 0, 0, 0.3)',
+                }}
               >
                 <div className="flex items-start gap-6">
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 transform hover:scale-110 transition-transform duration-300">
                     <point.Icon className={point.iconContainerClass} />
                   </div>
-                  <div>
-                    <h3 className="text-xl md:text-2xl font-semibold mb-3 text-slate-700">{point.title}</h3>
-                    <p className="text-slate-600 leading-relaxed">{point.description}</p>
+                  <div className="transform hover:translate-z-10 transition-transform duration-300">
+                    <h3 className="text-xl md:text-2xl font-semibold mb-3 text-white">{point.title}</h3>
+                    <p className="text-white/80 leading-relaxed">{point.description}</p>
                   </div>
                 </div>
               </motion.div>

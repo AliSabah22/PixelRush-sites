@@ -4,14 +4,44 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
 /* Global styles */
 body {
   /* font-family: 'Inter', sans-serif; /* Set in tailwind.config.js */
   /* Default text color - can be overridden by components */
-  color: theme('colors.slate.700'); 
-  background-color: theme('colors.white');
+  color: rgb(var(--foreground-rgb));
+  background: radial-gradient(circle at center, #1a1a1a 0%, #000000 100%);
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Add smooth scrolling to the whole page */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
 }
 
 /* Example of a custom utility or component style */
@@ -29,21 +59,6 @@ h1, h2, h3, h4, h5, h6 {
   /* font-family: theme('fontFamily.display'); /* If using a separate display font */
   /* color: theme('colors.neutral.800'); */
 }
-
-/* Custom scrollbar (optional, for aesthetics - might not work in all browsers e.g. Firefox) */
-/* ::-webkit-scrollbar {
-  width: 8px;
-}
-::-webkit-scrollbar-track {
-  background: theme('colors.neutral.100');
-}
-::-webkit-scrollbar-thumb {
-  background: theme('colors.primary.DEFAULT');
-  border-radius: 4px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: theme('colors.primary.dark');
-} */
 
 /* Example of a custom class if not using Tailwind utilities for everything */
 .custom-class {
