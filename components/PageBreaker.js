@@ -1,22 +1,26 @@
 'use client';
 
-import { motion } from 'framer-motion';
-
 export default function PageBreaker() {
   return (
-    <div className="relative w-full h-24 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black opacity-50"></div>
-      <div className="absolute inset-0 flex items-center justify-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="w-16 h-16 rounded-full border-2 border-white/20 flex items-center justify-center"
-        >
-          <div className="w-8 h-8 rounded-full border-2 border-white/40"></div>
-        </motion.div>
-      </div>
+    <div className="w-full overflow-hidden leading-none">
+      <svg
+        viewBox="0 0 1440 100"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        className="w-full h-16 md:h-24 lg:h-32"
+        preserveAspectRatio="none"
+      >
+        <defs>
+          <linearGradient id="pageBreakerGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#18181b" stopOpacity="1" />
+            <stop offset="100%" stopColor="transparent" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+        <path
+          d="M0,40 C360,120 1080,-40 1440,60 L1440,100 L0,100 Z"
+          fill="url(#pageBreakerGradient)"
+        />
+      </svg>
     </div>
   );
 } 
