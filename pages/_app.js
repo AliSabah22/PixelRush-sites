@@ -1,5 +1,6 @@
 // styles/globals.css is imported here for global application
 import '../styles/globals.css';
+import '../styles/shader.css';
 import { useEffect } from 'react';
 import Lenis from 'lenis';
 import Script from 'next/script';

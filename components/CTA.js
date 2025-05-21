@@ -1,9 +1,46 @@
 import { motion } from 'framer-motion';
 import AnimatedBackground from './AnimatedBackground';
 import { Canvas } from '@react-three/fiber';
+import { useEffect } from 'react';
 
 // Call to Action Section Component
 export default function CTA() {
+  // Load Calendly script
+  useEffect(() => {
+    // Load Calendly CSS if not already present
+    if (!document.getElementById('calendly-widget-css')) {
+      const link = document.createElement('link');
+      link.id = 'calendly-widget-css';
+      link.rel = 'stylesheet';
+      link.href = 'https://assets.calendly.com/assets/external/widget.css';
+      document.head.appendChild(link);
+    }
+    // Load Calendly script if not already present
+    if (!window.Calendly) {
+      const script = document.createElement('script');
+      script.src = 'https://assets.calendly.com/assets/external/widget.js';
+      script.async = true;
+      script.onload = () => {
+        if (window.Calendly) {
+          window.Calendly.initInlineWidget({
+            url: 'https://calendly.com/amplifyace/15',
+            parentElement: document.getElementById('calendly-inline'),
+            prefill: {},
+            utm: {}
+          });
+        }
+      };
+      document.body.appendChild(script);
+    } else {
+      window.Calendly.initInlineWidget({
+        url: 'https://calendly.com/amplifyace/15',
+        parentElement: document.getElementById('calendly-inline'),
+        prefill: {},
+        utm: {}
+      });
+    }
+  }, []);
+
   // Animation variants for Framer Motion
   const sectionVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -27,6 +64,15 @@ export default function CTA() {
         duration: 0.6,
         ease: [0.42, 0, 0.58, 1]
       }
+    }
+  };
+
+  const handleCalendlyClick = (e) => {
+    e.preventDefault();
+    if (typeof window !== 'undefined' && window.Calendly) {
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/amplifyace/15'
+      });
     }
   };
 
@@ -78,13 +124,7 @@ export default function CTA() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.3 }}
-            onClick={() => {
-              if (typeof window !== 'undefined' && window.Calendly) {
-                window.Calendly.initPopupWidget({
-                  url: 'https://calendly.com/your-calendly-link'
-                });
-              }
-            }}
+            onClick={handleCalendlyClick}
           >
             <span className="relative z-10">Book Your <span className="underline decoration-white/80 decoration-2 underline-offset-2">Free Demo</span></span>
             <svg className="w-6 h-6 text-white/80 z-10" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>

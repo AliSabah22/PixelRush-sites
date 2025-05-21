@@ -42,7 +42,7 @@ const projectsData = [
     category: "Automotive Dealership",
     imageUrl: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop&auto=format",
     description: "A comprehensive vehicle inventory and sales platform for a local car dealership, featuring advanced search filters and financing calculators. Increased online leads by 35%.",
-    liveLink: "#",
+    liveLink: "/auto-dealership",
     caseStudyLink: "#"
   },
 ];

@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import ShaderAnimation from './ShaderAnimation';
 
 // Placeholder icons: Consider using a library like Heroicons for professional SVGs.
 // For example, for "Slow Loading": <ClockIcon />, "Outdated Design": <EyeOffIcon />, "Zero Conversions": <TrendingDownIcon />
@@ -63,10 +64,10 @@ export default function Problem() {
   };
 
   const cardVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.95 },
+    hidden: { opacity: 0, x: 50, scale: 0.95 },
     visible: (i) => ({ // `i` is the custom index passed for staggering
       opacity: 1,
-      y: 0,
+      x: 0,
       scale: 1,
       transition: {
         delay: i * 0.15, // Staggered delay for each card
@@ -77,34 +78,49 @@ export default function Problem() {
   };
 
   return (
-    <section id="problem" className="py-16 md:py-24 bg-secondary-light/10"> {/* Changed from bg-slate-50 */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8"> {/* Responsive padding */}
+    <section id="problem" className="py-16 md:py-24 bg-secondary-light/10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }} // Trigger animation when 20% of the element is in view
+          viewport={{ once: true, amount: 0.2 }}
           variants={sectionVariants}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-primary-dark"> {/* Changed from text-slate-800 */}
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-primary-dark">
             Is Your Website Holding You Back?
           </h2>
         </motion.div>
-        <div className="grid md:grid-cols-3 gap-8 md:gap-10"> {/* Adjusted gap */}
-          {problemCards.map((point, index) => (
-            <motion.div 
-              key={index}
-              className="bg-white p-6 md:p-8 rounded-xl shadow-lg text-center hover:shadow-2xl transition-shadow duration-300" // Added hover effect & border-radius
-              custom={index} // Pass index to variants for staggered animation
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.3 }}
-              variants={cardVariants}
-            >
-              <point.Icon className={point.iconContainerClass} />
-              <h3 className="text-xl md:text-2xl font-semibold mb-3 text-slate-700">{point.title}</h3>
-              <p className="text-slate-600 leading-relaxed">{point.description}</p>
-            </motion.div>
-          ))}
+        
+        <div className="grid md:grid-cols-2 gap-12 items-center">
+          {/* Left side - Shader Animation */}
+          <div className="h-[600px] rounded-xl overflow-hidden shadow-2xl">
+            <ShaderAnimation />
+          </div>
+
+          {/* Right side - stacked cards */}
+          <div className="space-y-6">
+            {problemCards.map((point, index) => (
+              <motion.div 
+                key={index}
+                className="bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300"
+                custom={index}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true, amount: 0.3 }}
+                variants={cardVariants}
+              >
+                <div className="flex items-start gap-6">
+                  <div className="flex-shrink-0">
+                    <point.Icon className={point.iconContainerClass} />
+                  </div>
+                  <div>
+                    <h3 className="text-xl md:text-2xl font-semibold mb-3 text-slate-700">{point.title}</h3>
+                    <p className="text-slate-600 leading-relaxed">{point.description}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
