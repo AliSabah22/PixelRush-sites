@@ -1,13 +1,9 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import ScrollAnimation from './ScrollAnimation';
-
-gsap.registerPlugin(ScrollTrigger);
 
 // More realistic project data
 const projectsData = [
@@ -50,33 +46,11 @@ const projectsData = [
   },
 ];
 
-// Portfolio Section Component
+console.log("projectsData", projectsData);
+
 const Portfolio = () => {
   const router = useRouter();
-  const sectionRef = useRef(null);
   const projectsRef = useRef([]);
-
-  useEffect(() => {
-    const projects = projectsRef.current;
-    
-    projects.forEach((project, index) => {
-      gsap.from(project, {
-        scrollTrigger: {
-          trigger: project,
-          start: 'top bottom-=100',
-          toggleActions: 'play none none reverse'
-        },
-        y: 50,
-        opacity: 0,
-        duration: 0.8,
-        delay: index * 0.2
-      });
-    });
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
 
   const handleProjectClick = (link) => {
     router.push(link);
@@ -96,34 +70,43 @@ const Portfolio = () => {
           </h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project, index) => (
-            <motion.div
-              key={project.title}
-              ref={el => projectsRef.current[index] = el}
-              className="card group cursor-pointer"
-              whileHover={{ y: -10 }}
-              onClick={() => handleProjectClick(project.liveLink)}
-            >
-              <div className="relative aspect-video mb-6 overflow-hidden rounded-lg">
-                <img
-                  src={project.imageUrl}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-              </div>
-              <h3 className="text-xl font-bold mb-3">{project.title}</h3>
-              <p className="text-white/70 mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2">
-                <span
-                  className="px-3 py-1 bg-white/5 rounded-full text-sm text-white/80"
-                >
-                  {project.category}
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
+        {projectsData.length === 0 ? (
+          <div className="text-white text-center">No projects found.</div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projectsData.map((project, index) => (
+              <motion.div
+                key={project.title}
+                ref={el => projectsRef.current[index] = el}
+                className="card group cursor-pointer z-10"
+                whileHover={{ y: -10 }}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                onClick={() => handleProjectClick(project.liveLink)}
+              >
+                <div className="relative aspect-video mb-6 overflow-hidden rounded-lg">
+                  <img
+                    src={project.imageUrl}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    onError={e => { e.target.src = '/placeholder.png'; }}
+                  />
+                </div>
+                <h3 className="text-xl font-bold mb-3">{project.title}</h3>
+                <p className="text-white/70 mb-4">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  <span
+                    className="px-3 py-1 bg-white/5 rounded-full text-sm text-white/80"
+                  >
+                    {project.category}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        )}
 
         <div className="text-center mt-16">
           <motion.button
