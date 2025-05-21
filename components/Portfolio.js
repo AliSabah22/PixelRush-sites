@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useRouter } from 'next/router';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,7 +15,7 @@ const projectsData = [
     // Using Unsplash for more realistic placeholders - replace with actual project images
     imageUrl: "https://images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop&auto=format", 
     description: "A sleek, patient-focused website for a modern dental clinic, featuring online appointment booking and clear service showcases. Resulted in a 40% increase in new patient inquiries.",
-    liveLink: "/dental-clinic", // Updated to point to the new dental clinic landing page
+    liveLink: "/dental-clinic",
     caseStudyLink: "#" // Placeholder for case study
   },
   {
@@ -48,6 +49,7 @@ const projectsData = [
 
 // Portfolio Section Component
 export default function Portfolio() {
+  const router = useRouter();
   const sectionRef = useRef(null);
   // Ref to store an array of card elements for GSAP animations
   const cardsRef = useRef([]);
@@ -96,6 +98,12 @@ export default function Portfolio() {
     }
   };
 
+  const handleCardClick = (link) => {
+    if (link && link !== '#') {
+      router.push(link);
+    }
+  };
+
   return (
     <section id="portfolio" ref={sectionRef} className="py-16 md:py-24 bg-primary-light/10"> {/* Using a light tint of primary color */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -114,13 +122,11 @@ export default function Portfolio() {
           {projectsData.map((project) => {
             // If liveLink is not a placeholder, make the whole card clickable
             const isClickable = project.liveLink && project.liveLink !== '#';
-            const CardWrapper = isClickable ? 'a' : 'div';
+            const CardWrapper = isClickable ? 'div' : 'div';
             const cardProps = isClickable
               ? {
-                  href: project.liveLink,
-                  target: '_blank',
-                  rel: 'noopener noreferrer',
-                  className: 'block group',
+                  onClick: () => handleCardClick(project.liveLink),
+                  className: 'block group cursor-pointer',
                   style: { textDecoration: 'none' },
                 }
               : { className: 'group' };
@@ -154,10 +160,12 @@ export default function Portfolio() {
                       <div className="mt-6 flex space-x-4">
                         <a 
                           href={project.liveLink} 
-                          target="_blank" 
-                          rel="noopener noreferrer" 
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleCardClick(project.liveLink);
+                          }}
                           className="text-accent-DEFAULT hover:text-accent-dark font-medium transition-colors duration-300 text-sm underline"
-                          tabIndex={isClickable ? -1 : 0} // If card is clickable, skip link in tab order
+                          tabIndex={isClickable ? -1 : 0}
                         >
                           View Live Site &rarr;
                         </a>
