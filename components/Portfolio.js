@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 const projectsData = [
   {
     id: 1,
-    title: "Apex Dental: Smile Brighter Online",
+    title: "Healthcare / Dentistry Website Template",
     category: "Healthcare / Dentistry",
     // Using Unsplash for more realistic placeholders - replace with actual project images
     imageUrl: "https://images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop&auto=format", 
@@ -20,25 +20,25 @@ const projectsData = [
   },
   {
     id: 2,
-    title: "Iron & Grace Fitness Hub",
+    title: "Fitness & Wellness Website Template",
     category: "Fitness & Wellness",
     imageUrl: "https://images.unsplash.com/photo-1549060279-7e168fcee0c2?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop&auto=format",
     description: "Dynamic web portal for a boutique gym, integrating class schedules, membership management, and trainer profiles. Boosted member engagement by 60%.",
-    liveLink: "#",
+    liveLink: "/fitness-studio",
     caseStudyLink: "#"
   },
   {
     id: 3,
-    title: "Prestige Properties Showcase",
+    title: "Real Estate Website Template",
     category: "Real Estate",
     imageUrl: "https://images.unsplash.com/photo-1582407947304-fd86f028f716?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop&auto=format",
     description: "Luxurious online presence for a high-end realtor, showcasing properties with immersive galleries and virtual tours. Led to a 25% faster sales cycle.",
-    liveLink: "#",
+    liveLink: "/real-estate",
     caseStudyLink: "#"
   },
   {
     id: 4,
-    title: "Velocity Motors: Online Showroom",
+    title: "Dealership Website Template",
     category: "Automotive Dealership",
     imageUrl: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop&auto=format",
     description: "A comprehensive vehicle inventory and sales platform for a local car dealership, featuring advanced search filters and financing calculators. Increased online leads by 35%.",
