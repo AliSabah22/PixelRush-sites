@@ -116,29 +116,44 @@ export default function Hero() {
     };
   }, []);
 
-  const toggleScramble = () => {
-    if (isDecoded) {
-      // If already decoded, open Calendly
-      handleCalendlyClick();
-      return;
-    }
-
-    const text = message;
-    const duration = 1.5;
-    const speed = 1;
-
-    gsap.to(scrambleTextRef.current, {
-      duration,
-      scrambleText: {
-        text,
-        chars: scrambleChars,
-        revealDelay: 0.5,
-        speed,
-      },
-    });
-
-    setIsDecoded(true);
-  };
+  useEffect(() => {
+    let decryptTimeout, encryptTimeout;
+    const decrypt = () => {
+      if (scrambleTextRef.current) {
+        gsap.to(scrambleTextRef.current, {
+          duration: 1.5,
+          scrambleText: {
+            text: message,
+            chars: scrambleChars,
+            revealDelay: 0.5,
+            speed: 1,
+          },
+        });
+      }
+      setIsDecoded(true);
+      encryptTimeout = setTimeout(encrypt, 3000);
+    };
+    const encrypt = () => {
+      if (scrambleTextRef.current) {
+        gsap.to(scrambleTextRef.current, {
+          duration: 1.5,
+          scrambleText: {
+            text: '*&@#$#@#$@*&$(@#^)',
+            chars: scrambleChars,
+            speed: 0.3,
+          },
+        });
+      }
+      setIsDecoded(false);
+      decryptTimeout = setTimeout(decrypt, 3000);
+    };
+    // Start the loop
+    decrypt();
+    return () => {
+      clearTimeout(decryptTimeout);
+      clearTimeout(encryptTimeout);
+    };
+  }, []);
 
   return (
     <section className="relative w-full h-screen overflow-hidden bg-black">
@@ -200,7 +215,7 @@ export default function Hero() {
       </motion.div>
 
       {/* Content Container */}
-      <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-4">
+      <div className="relative z-[100] w-full h-full flex flex-col items-center justify-center px-4">
         {/* Logo */}
         <motion.div 
           className="absolute top-8 left-1/2 -translate-x-1/2 w-fit"
@@ -243,21 +258,10 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            whileHover={{ scale: 1.05 }}
           >
             <div className="absolute inset-0 bg-gradient-to-r from-accent-light/10 to-accent-DEFAULT/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="flex items-center justify-center gap-4">
               <span ref={scrambleTextRef} className="select-none text-lg font-medium text-center flex-1">*&@#$#@#$@*&$(@#^)</span>
-              <motion.button
-                ref={buttonRef}
-                type="button"
-                className="w-12 h-12 border-2 border-zinc-600 bg-black hover:bg-black/85 duration-100 text-white rounded-full text-base focus:outline-green-500 cursor-pointer flex items-center justify-center"
-                onClick={toggleScramble}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {isDecoded ? '→' : 'D'}
-              </motion.button>
             </div>
           </motion.div>
 
