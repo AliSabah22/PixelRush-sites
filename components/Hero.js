@@ -5,6 +5,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial } from '@react-three/drei';
 import { motion, AnimatePresence } from 'framer-motion';
 import * as THREE from 'three';
+import Image from 'next/image';
 import AnimatedBackground from './AnimatedBackground';
 import { gsap } from 'gsap';
 import { ScrambleTextPlugin } from 'gsap/ScrambleTextPlugin';
@@ -149,26 +150,78 @@ export default function Hero() {
         </Canvas>
       </div>
 
+      {/* Floating Images */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1 }}
+        className="absolute inset-0 z-0"
+      >
+        <motion.div
+          className="absolute top-1/4 right-1/4 w-64 h-64"
+          animate={{
+            y: [0, -20, 0],
+            rotate: [0, 5, 0],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        >
+          <Image
+            src="/images/Floating-image 1.jpg"
+            alt="Modern website design"
+            width={256}
+            height={256}
+            className="rounded-lg shadow-2xl"
+          />
+        </motion.div>
+        <motion.div
+          className="absolute bottom-1/4 left-1/4 w-48 h-48"
+          animate={{
+            y: [0, 20, 0],
+            rotate: [0, -5, 0],
+          }}
+          transition={{
+            duration: 7,
+            repeat: Infinity,
+            repeatType: "reverse",
+          }}
+        >
+          <Image
+            src="/images/Floating-image2.jpg"
+            alt="Website mockup"
+            width={300}
+            height={300}
+            className="rounded-lg shadow-2xl"
+          />
+        </motion.div>
+      </motion.div>
+
       {/* Content Container */}
       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center px-4">
-        {/* Logo - Commented out for now
-        <motion.a 
-          href="https://www.linkedin.com/in/anas-frontdev/" 
-          target="_blank" 
-          rel="noopener noreferrer" 
+        {/* Logo */}
+        <motion.div 
           className="absolute top-8 left-1/2 -translate-x-1/2 w-fit"
-          whileHover={{ scale: 1.05, rotate: 5 }}
-          transition={{ duration: 0.25 }}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <img src="/assets/pixelrush-logo.png" className="w-14 h-auto mix-blend-difference" alt="Pixelrush logo" />
-        </motion.a>
-        */}
+          <Image
+            src="/images/pixelrush-logo.png"
+            alt="PixelRush logo"
+            width={56}
+            height={56}
+            className="w-14 h-auto mix-blend-difference"
+          />
+        </motion.div>
 
         {/* Main Content */}
         <div className="flex flex-col items-center gap-8 max-w-4xl mx-auto">
           {/* Headline */}
           <motion.h1 
-            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6"
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -176,7 +229,7 @@ export default function Hero() {
             PixelRush: Your Shortcut to a Killer Website
           </motion.h1>
           <motion.p 
-            className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl"
+            className="text-xl md:text-2xl text-white/80 mb-8 max-w-3xl text-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -184,7 +237,7 @@ export default function Hero() {
             Transforming Businesses, One Pixel at a Time
           </motion.p>
 
-          {/* Scramble Text Box */}
+          {/* Scramble Text Box with Visual Element */}
           <motion.div 
             className="relative w-96 bg-white text-black border border-black shadow-lg shadow-white/30 hover:shadow-white/50 py-6 px-6 rounded-4xl overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
@@ -192,6 +245,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             whileHover={{ scale: 1.05 }}
           >
+            <div className="absolute inset-0 bg-gradient-to-r from-accent-light/10 to-accent-DEFAULT/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="flex items-center justify-center gap-4">
               <span ref={scrambleTextRef} className="select-none text-lg font-medium text-center flex-1">*&@#$#@#$@*&$(@#^)</span>
               <motion.button

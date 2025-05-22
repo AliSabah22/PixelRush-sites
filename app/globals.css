@@ -39,7 +39,7 @@
   }
 
   .card {
-    @apply bg-white/5 rounded-xl p-6 backdrop-blur-sm border border-white/10;
+    @apply bg-black/60 rounded-xl p-6 backdrop-blur-sm border border-white/10;
   }
 }
 

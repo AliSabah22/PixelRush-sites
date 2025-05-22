@@ -25,9 +25,11 @@ export default function CTA() {
       script.async = true;
       script.onload = () => {
         if (window.Calendly) {
+          const calendlyDiv = document.getElementById('calendly-inline');
+          if (calendlyDiv) calendlyDiv.innerHTML = '';
           window.Calendly.initInlineWidget({
             url: 'https://calendly.com/amplifyace/15',
-            parentElement: document.getElementById('calendly-inline'),
+            parentElement: calendlyDiv,
             prefill: {},
             utm: {}
           });
@@ -35,13 +37,20 @@ export default function CTA() {
       };
       document.body.appendChild(script);
     } else {
+      const calendlyDiv = document.getElementById('calendly-inline');
+      if (calendlyDiv) calendlyDiv.innerHTML = '';
       window.Calendly.initInlineWidget({
         url: 'https://calendly.com/amplifyace/15',
-        parentElement: document.getElementById('calendly-inline'),
+        parentElement: calendlyDiv,
         prefill: {},
         utm: {}
       });
     }
+    // Cleanup on unmount
+    return () => {
+      const calendlyDiv = document.getElementById('calendly-inline');
+      if (calendlyDiv) calendlyDiv.innerHTML = '';
+    };
   }, []);
 
   const handleCalendlyClick = (e) => {

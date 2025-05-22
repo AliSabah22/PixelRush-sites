@@ -62,7 +62,7 @@ export default function Solution() {
           {solutionsData.map((solution, index) => (
             <motion.div 
               key={index}
-              className="bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1"
+              className="bg-white p-6 md:p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 text-black"
               custom={index}
               initial="hidden"
               whileInView="visible"
