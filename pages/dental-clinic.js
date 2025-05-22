@@ -259,7 +259,7 @@ export default function DentalClinic() {
               className="relative h-[400px] rounded-xl overflow-hidden shadow-2xl"
             >
               <Image
-                src="/images/dentist-smile.jpg"
+                src="/images/paitent-smiling-with-doctor.jpg"
                 alt="Smiling dentist with patient"
                 fill
                 className="object-cover"
@@ -371,8 +371,9 @@ export default function DentalClinic() {
                 className="w-full h-full object-cover"
                 controls
                 poster="/images/dentist-video-poster.jpg"
+                alt="Dental Clinic Tour"
               >
-                <source src="/videos/dentist-welcome.mp4" type="video/mp4" />
+                <source src="" type="video/mp4" alt="Dental Clinic Tour" />
                 Your browser does not support the video tag.
               </video>
               <motion.div
@@ -441,23 +442,20 @@ export default function DentalClinic() {
             Smile Transformations
           </motion.h2>
           <motion.div 
-            className="grid md:grid-cols-3 gap-8"
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
             viewport={{ once: true }}
           >
             <div className="flex flex-col items-center">
-              <img src="/images/before1.jpg" alt="Before Smile 1" className="w-32 h-20 object-cover rounded-lg shadow mb-2" />
-              <img src="/images/after1.jpg" alt="After Smile 1" className="w-32 h-20 object-cover rounded-lg shadow" />
+              <img src="/images/smiles-b&a(1).jpg" alt="Smile Transformation 1" className="w-60 h-100 object-cover rounded-lg shadow" />
             </div>
             <div className="flex flex-col items-center">
-              <img src="/images/before2.jpg" alt="Before Smile 2" className="w-32 h-20 object-cover rounded-lg shadow mb-2" />
-              <img src="/images/after2.jpg" alt="After Smile 2" className="w-32 h-20 object-cover rounded-lg shadow" />
+              <img src="/images/smiles-b&a(2).jpg" alt="Smile Transformation 2" className="w-60 h-100 object-cover rounded-lg shadow" />
             </div>
             <div className="flex flex-col items-center">
-              <img src="/images/before3.jpg" alt="Before Smile 3" className="w-32 h-20 object-cover rounded-lg shadow mb-2" />
-              <img src="/images/after3.jpg" alt="After Smile 3" className="w-32 h-20 object-cover rounded-lg shadow" />
+              <img src="/images/smiles-b&a(3).jpg" alt="Smile Transformation 3" className="w-60 h-100 object-cover rounded-lg shadow" />
             </div>
           </motion.div>
           <motion.div 

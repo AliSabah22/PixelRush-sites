@@ -12,7 +12,7 @@ const projectsData = [
     title: "Healthcare / Dentistry Website Template",
     category: "Healthcare / Dentistry",
     // Using Unsplash for more realistic placeholders - replace with actual project images
-    imageUrl: "https://images.unsplash.com/photo-1580274455191-1c62238fa333?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&w=600&h=400&fit=crop&auto=format", 
+    imageUrl: "/images/Dentist-porfilio-pic.jpg",
     description: "A sleek, patient-focused website for a modern dental clinic, featuring online appointment booking and clear service showcases. Resulted in a 40% increase in new patient inquiries.",
     liveLink: "/dental-clinic",
     caseStudyLink: "#" // Placeholder for case study
