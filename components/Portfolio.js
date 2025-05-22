@@ -57,7 +57,7 @@ const Portfolio = () => {
   };
 
   return (
-    <section id="portfolio" className="py-16 md:py-24 bg-gradient-to-br from-primary-dark via-mediumBlue-dark to-secondary-dark text-white min-h-screen flex items-center justify-center">
+    <section id="portfolio" className="py-16 md:py-24 bg-white text-black min-h-screen flex items-center justify-center">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 w-full h-full flex flex-col justify-center">
         <motion.div
           initial={{ opacity: 0 }}
@@ -65,20 +65,20 @@ const Portfolio = () => {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-center mb-12 md:mb-20 text-black">
             Our Recent Work
           </h2>
         </motion.div>
 
         {projectsData.length === 0 ? (
-          <div className="text-white text-center">No projects found.</div>
+          <div className="text-black text-center">No projects found.</div>
         ) : (
           <div className="grid grid-cols-2 grid-rows-2 gap-10 w-full h-full min-h-[70vh] max-w-6xl mx-auto items-center justify-center">
             {projectsData.slice(0, 4).map((project, index) => (
               <motion.div
                 key={project.title}
                 ref={el => projectsRef.current[index] = el}
-                className="card group cursor-pointer z-10 flex flex-col h-full min-h-[380px] max-h-[500px] p-8 items-center text-center"
+                className="bg-black group cursor-pointer z-10 flex flex-col h-full min-h-[380px] max-h-[500px] p-8 items-center text-center border border-gray-800 shadow-lg hover:shadow-xl rounded-2xl"
                 whileHover={{ y: -10 }}
                 initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -93,11 +93,11 @@ const Portfolio = () => {
                     onError={e => { e.target.src = '/placeholder.png'; }}
                   />
                 </div>
-                <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
+                <h3 className="text-2xl font-bold mb-3 text-white">{project.title}</h3>
                 <p className="text-white/80 mb-4 text-base">{project.description}</p>
                 <div className="flex flex-wrap gap-2 justify-center mb-2">
                   <span
-                    className="px-3 py-1 bg-white/5 rounded-full text-sm text-white/80"
+                    className="px-3 py-1 bg-white/10 rounded-full text-sm text-white/80"
                   >
                     {project.category}
                   </span>
@@ -105,11 +105,10 @@ const Portfolio = () => {
                 <div className="w-full flex items-center justify-center">
                   <button
                     onClick={() => handleProjectClick(project.liveLink)}
-                    className="inline-flex items-center gap-1 text-white underline underline-offset-4 hover:text-primary transition-colors text-base font-medium bg-transparent border-none shadow-none p-0 cursor-pointer"
-                    style={{ boxShadow: 'none' }}
+                    className="inline-flex items-center gap-2 px-6 py-2 bg-black border border-white text-white rounded-full hover:bg-white hover:text-black transition-all duration-300 text-base font-medium"
                   >
                     View Template
-                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" /></svg>
                   </button>
                 </div>
               </motion.div>
